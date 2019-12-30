@@ -1,5 +1,6 @@
-import { Component, OnInit, OnChanges, Input, ChangeDetectionStrategy, ViewContainerRef, ViewChild } from "@angular/core";
+import { NodeComponent } from "./node.component";
 import { NodeService } from "./shared/node.service";
+import { Component, OnInit, OnChanges, Input, ChangeDetectionStrategy, ViewContainerRef, ViewChild } from "@angular/core";
 
 
 
@@ -14,6 +15,7 @@ export class NodesContainerComponent implements OnInit {
   @Input() nodes = [];
   @Input() connections = [];
   @ViewChild("nodes", { read: ViewContainerRef }) viewContainerRef: ViewContainerRef;
+  serverName: any;
 
 
   constructor(private nodeService: NodeService) {}
@@ -34,10 +36,12 @@ export class NodesContainerComponent implements OnInit {
   }
 
 
+
   // tslint:disable-next-line: typedef
-  addNode() {
+  createNode() {
+    // get an input form user and set the name = input
     // tslint:disable-next-line: typedef
-    const node = { id: "Step id_"  + [Math.random().toString(16).slice(2, 8)], top: 1, left: 2 };
+    var node = { id: "state : " + this.serverName };
     this.nodeService.createNode(node);
   }
 
