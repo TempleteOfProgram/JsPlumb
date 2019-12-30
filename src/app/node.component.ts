@@ -9,16 +9,15 @@ export class Node {
 @Component({
   selector: "node",
   template: `
-  <div class="node" id="{{node.id}}">{{node.id}}
+  <div class="node" id="{{node.id}}"> State: {{node.id}}
       <input
-          type="text"
-          (keyup)="onKey($event)"
+          [(ngModel)]="node.id"
           style="input[type=text] {
                   width: 50%;
                   padding: 12px 20px;
                   margin: 8px 0;
                   box-sizing: border-box;
-          }" />
+                }" />
   </div>`,
   styles: [`.node {position: absolute;width: 150px;height: 50px;
   padding: 4px;box-shadow: 0 10px 40px 0 #B0C1D9;text-align: center;}`]
@@ -41,7 +40,7 @@ export class NodeComponent implements AfterViewInit {
     };
 
     // tslint:disable-next-line: typedef
-    let Endpoint1 = {
+    let Endpoint_From = {
       endpoint: ["Dot", { radius: 7 }],
       paintStyle: { fill: "#99cb3a" },
       isSource: true,
@@ -55,7 +54,7 @@ export class NodeComponent implements AfterViewInit {
     };
 
     // tslint:disable-next-line: typedef
-    let Endpoint2 = {
+    let Endpoint_TO = {
       endpoint: ["Dot", { radius: 4 }],
       paintStyle: { fill: "#ffcb3a" },
       isSource: false,
@@ -67,15 +66,15 @@ export class NodeComponent implements AfterViewInit {
 
 
     const { id } = this.node;
-    this.jsPlumbInstance.addEndpoint(id, { anchor: "Bottom", uuid: id + "_bottom" }, Endpoint1);
-    this.jsPlumbInstance.addEndpoint(id, { anchor: "Top", uuid: id + "_top" }, Endpoint2);
+    this.jsPlumbInstance.addEndpoint(id, { anchor: "Bottom", uuid: id + "_bottom" }, Endpoint_From);
+    this.jsPlumbInstance.addEndpoint(id, { anchor: "Top", uuid: id + "_top" }, Endpoint_TO);
     this.jsPlumbInstance.draggable(id);
   }
 
-  onKey(event) {
-    console.log(event);
-    this.nodeCom.serverName = event.target.value;
-    // const inputValue = event.target.value;
-  }
+  // onKey(event) {
+  //   console.log(event);
+  //   this.nodeCom.serverName = event.target.value;
+  //   const inputValue = event.target.value;
+  // }
 
 }

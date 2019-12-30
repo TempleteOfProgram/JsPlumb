@@ -1,6 +1,6 @@
-import { NodeComponent } from "./node.component";
+// import { NodeComponent } from "./node.component";
 import { NodeService } from "./shared/node.service";
-import { Component, OnInit, OnChanges, Input, ChangeDetectionStrategy, ViewContainerRef, ViewChild } from "@angular/core";
+import { Component, OnInit, Input, ViewContainerRef, ViewChild } from "@angular/core";
 
 
 
@@ -41,7 +41,7 @@ export class NodesContainerComponent implements OnInit {
   createNode() {
     // get an input form user and set the name = input
     // tslint:disable-next-line: typedef
-    var node = { id: "state : " + this.serverName };
+    var node = { id:  ""+[Math.random().toString(16).slice(2, 8)] };
     this.nodeService.createNode(node);
   }
 
