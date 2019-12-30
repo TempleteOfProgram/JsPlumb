@@ -1,9 +1,10 @@
 import { Component, Input, AfterViewInit } from "@angular/core";
 
-export interface Node {
+
+export class Node {
   id: string;
-  top?: number;
-  left?: number
+  top: number;
+  left: number;
 }
 
 @Component({
@@ -18,14 +19,16 @@ export class NodeComponent implements AfterViewInit {
   @Input() node: Node;
   @Input() jsPlumbInstance;
 
+  // tslint:disable-next-line: typedef
   ngAfterViewInit() {
+    // tslint:disable-next-line: typedef
     const exampleDropOptions = {
       tolerance: "touch",
       hoverClass: "dropHover",
       activeClass: "dragActive"
     };
 
-
+    // tslint:disable-next-line: typedef
     let Endpoint1 = {
       endpoint: ["Dot", { radius: 7 }],
       paintStyle: { fill: "#99cb3a" },
@@ -39,7 +42,7 @@ export class NodeComponent implements AfterViewInit {
       dropOptions: exampleDropOptions
     };
 
-
+    // tslint:disable-next-line: typedef
     let Endpoint2 = {
       endpoint: ["Dot", { radius: 4 }],
       paintStyle: { fill: "#ffcb3a" },
