@@ -23,11 +23,11 @@ export class NodeService {
           (<any>component.instance).node = node;
           (<any>component.instance).jsPlumbInstance = this.jsPlumbInstance;
           this.rootViewContainer.insert(component.hostView);
-          console.log("in NodeService.." , component.instance );
+          // console.log("in NodeService.." , component.instance );
         }
 
         // tslint:disable-next-line: typedef
-        addConnection(connection) {
+        addConnection(connection: any) {
           this.jsPlumbInstance.connect({ uuids: connection.uuids });
         }
 

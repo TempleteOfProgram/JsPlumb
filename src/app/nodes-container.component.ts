@@ -15,7 +15,6 @@ export class NodesContainerComponent implements OnInit {
   @Input() nodes = [];
   @Input() connections = [];
   @ViewChild("nodes", { read: ViewContainerRef }) viewContainerRef: ViewContainerRef;
-  serverName: any;
 
 
   constructor(private nodeService: NodeService) {}
@@ -24,35 +23,29 @@ export class NodesContainerComponent implements OnInit {
 
         this.nodeService.setRootViewContainerRef(this.viewContainerRef);
 
-        this.nodes.forEach(node => {
-          this.nodeService.createNode(node);
-        });
+        // this.nodes.forEach(node => {
+        //   this.nodeService.createNode(node);
+        // });
 
-        setTimeout(() => {
-          this.connections.forEach(connection => {
-            this.nodeService.addConnection(connection);
-          });
-        });
+        // setTimeout(() => {
+        //   this.connections.forEach(connection => {
+        //     this.nodeService.addConnection(connection);
+        //   });
+        // });
   }
 
 
 
-  // tslint:disable-next-line: typedef
+
   createNode() {
-    // get an input form user and set the name = input
-    // tslint:disable-next-line: typedef
-    var node = { id:  ""+[Math.random().toString(16).slice(2, 8)] };
+    var temp = String.fromCharCode(Math.floor(Math.random()*100));
+    var node = { id: temp};
     this.nodeService.createNode(node);
   }
-
-
-  // tslint:disable-next-line: typedef
   saveNodeJson() {
-    // tslint:disable-next-line: typedef
     const container = this.viewContainerRef.element.nativeElement.parentNode;
     // tslint:disable-next-line: typedef
-    const nodes = Array.from(container.querySelectorAll(".node")).map((node: HTMLDivElement) => {
-
+    const nodes = Array.from(container.querySelectorAll(".node")).map((node: any) => {
       return {
         id: node.id,
         top: node.offsetTop,

@@ -3,24 +3,33 @@ import { Component, Input, AfterViewInit } from "@angular/core";
 
 
 export class Node {
-  id: string;
+  id: any;
 }
-
+// @Component({
+//   selector: "node",
+//   templateUrl: "./node.component.html"
+// })
 @Component({
   selector: "node",
   template: `
-  <div class="node" id="{{node.id}}"> State: {{node.id}}
+  <div class="node" id="{{node.id}}"> Status Name:
       <input
-          [(ngModel)]="node.id"
-          style="input[type=text] {
-                  width: 50%;
-                  padding: 12px 20px;
-                  margin: 8px 0;
-                  box-sizing: border-box;
-                }" />
+          style=" margin-top:20%;
+                  width: 60%;
+                  height: 20%;"
+                  [(ngModel)]="node.id"
+      />
   </div>`,
-  styles: [`.node {position: absolute;width: 150px;height: 50px;
-  padding: 4px;box-shadow: 0 10px 40px 0 #B0C1D9;text-align: center;}`]
+  styles: [`.node {
+                margin-top:20px;
+                border:1px solid #000;
+                position: absolute;
+                width: 150px;
+                height: 100px;
+                padding: 4px;
+                text-align: center;
+                border-radius: 50%;
+                }`]
 })
 
 
@@ -29,6 +38,10 @@ export class NodeComponent implements AfterViewInit {
 
   @Input() node: Node;
   @Input() jsPlumbInstance;
+
+
+	
+
 
   // tslint:disable-next-line: typedef
   ngAfterViewInit() {
@@ -46,8 +59,8 @@ export class NodeComponent implements AfterViewInit {
       isSource: true,
       scope: "jsPlumb_DefaultScope",
       connectorStyle: { stroke: "#99cb3a", strokeWidth: 3 },
-      connector: ["Bezier", { curviness: 63 }],
-      maxConnections: 30,
+      connector: ["Bezier", { curviness: 1 }],
+      maxConnections: 10,
       isTarget: false,
       connectorOverlays: [["Arrow", { location: 1 }]],
       dropOptions: exampleDropOptions
