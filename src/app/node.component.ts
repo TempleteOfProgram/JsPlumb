@@ -13,11 +13,16 @@ export class Node {
 @Component({
   selector: "node",
   template: `
-  <div class="node" id="{{node.id}}"> Status Name:
-      <button (click)="removeNode(node)">remove </button>
+  <div class="node" id="{{node.id}}">
+      <button
+        type="button"
+        class="close"
+        aria-label="Close"
+        (click)="removeNode(node)"> <span aria-hidden="true">×</span>
+      </button>
+      <br>Status Name:
       <input
-          style=" margin-top:20%;
-                  width: 60%;
+          style=" width: 60%;
                   height: 20%;"
                   [(ngModel)]="node.id"
       />
