@@ -1,3 +1,4 @@
+import { NodeService } from './shared/node.service';
 import { NodesContainerComponent } from "./nodes-container.component";
 import { Component, Input, AfterViewInit } from "@angular/core";
 
@@ -13,6 +14,7 @@ export class Node {
   selector: "node",
   template: `
   <div class="node" id="{{node.id}}"> Status Name:
+      <button (click)="removeNode(node)">remove </button>
       <input
           style=" margin-top:20%;
                   width: 60%;
@@ -34,13 +36,10 @@ export class Node {
 
 
 export class NodeComponent implements AfterViewInit {
-  constructor(private nodeCom : NodesContainerComponent) { }
+  constructor(private nodeCom : NodesContainerComponent, private nodeService: NodeService) { }
 
   @Input() node: Node;
   @Input() jsPlumbInstance;
-
-
-	
 
 
   // tslint:disable-next-line: typedef
@@ -72,7 +71,7 @@ export class NodeComponent implements AfterViewInit {
       paintStyle: { fill: "#ffcb3a" },
       isSource: false,
       scope: "jsPlumb_DefaultScope",
-      maxConnections: 1,
+      maxConnections: 10,
       isTarget: true,
       dropOptions: exampleDropOptions
     };
@@ -83,7 +82,9 @@ export class NodeComponent implements AfterViewInit {
     this.jsPlumbInstance.addEndpoint(id, { anchor: "Top", uuid: id + "_top" }, Endpoint_TO);
     this.jsPlumbInstance.draggable(id);
   }
-
+  removeNode(node:Node){
+    this.nodeService.removeNode(node);
+  }
   // onKey(event) {
   //   console.log(event);
   //   this.nodeCom.serverName = event.target.value;

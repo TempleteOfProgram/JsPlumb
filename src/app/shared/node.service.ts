@@ -31,6 +31,10 @@ export class NodeService {
           this.jsPlumbInstance.connect({ uuids: connection.uuids });
         }
 
+        removeNode(node:Node){
+          this.jsPlumbInstance.remove(node.id);
+        }
+
         // tslint:disable-next-line: typedef
         public clear() {
           this.rootViewContainer.clear();
