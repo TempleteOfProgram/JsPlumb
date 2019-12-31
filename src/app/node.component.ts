@@ -1,15 +1,13 @@
-import { NodeService } from './shared/node.service';
+import { NodeService } from "./shared/node.service";
 import { NodesContainerComponent } from "./nodes-container.component";
 import { Component, Input, AfterViewInit } from "@angular/core";
 
 
-export class Node {
+// tslint:disable-next-line: interface-name
+export interface Node {
   id: any;
 }
-// @Component({
-//   selector: "node",
-//   templateUrl: "./node.component.html"
-// })
+
 @Component({
   selector: "node",
   template: `
@@ -20,7 +18,9 @@ export class Node {
         aria-label="Close"
         (click)="removeNode(node)"> <span aria-hidden="true">×</span>
       </button>
+
       <br>Status Name:
+
       <input
           style=" width: 60%;
                   height: 20%;"
@@ -87,7 +87,8 @@ export class NodeComponent implements AfterViewInit {
     this.jsPlumbInstance.addEndpoint(id, { anchor: "Top", uuid: id + "_top" }, Endpoint_TO);
     this.jsPlumbInstance.draggable(id);
   }
-  removeNode(node:Node){
+  // tslint:disable-next-line: typedef
+  removeNode(node:Node) {
     this.nodeService.removeNode(node);
   }
   // onKey(event) {
