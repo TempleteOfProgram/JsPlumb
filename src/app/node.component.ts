@@ -1,6 +1,9 @@
 import { NodeService } from "./shared/node.service";
 import { NodesContainerComponent } from "./nodes-container.component";
-import { Component, Input, AfterViewInit } from "@angular/core";
+import { Component, Input, AfterViewInit, OnInit } from "@angular/core";
+import { FormControl } from "@angular/forms";
+import { Subscription } from "rxjs/Subscription";
+import { debounceTime } from "rxjs/operators";
 
 export interface Node {
   id: any;
@@ -17,13 +20,7 @@ export interface Node {
         (click)="removeNode(node)"> <span aria-hidden="true">×</span>
       </button>
 
-      <br>Status Name:
-
-      <input
-          style=" width: 60%;
-                  height: 20%;"
-                  [(ngModel)]="node.id"
-      />
+      <input style="font-size:0.7em; padding:.5em;" type="text" [formControl]="nodeId"/>
   </div>`,
   styles: [`.node {
                 margin-top:20px;
@@ -38,18 +35,37 @@ export interface Node {
 })
 
 
-export class NodeComponent implements AfterViewInit {
+export class NodeComponent implements OnInit, AfterViewInit {
+  private subscriptions: Subscription = new Subscription;
   constructor(private nodeCom : NodesContainerComponent, private nodeService: NodeService) { }
+  
 
   @Input() node: Node;
+  nodeId = new FormControl('');
   @Input() jsPlumbInstance;
 
+  ngOnInit(): void {
+    this.setFromControlValue();
+    const _nodeId = this.nodeId.valueChanges.pipe(debounceTime(500)).subscribe(value => this.updateNodeId(value));              
+    this.subscriptions.add(_nodeId);
+  }
+
+  setFromControlValue(){
+    if(this.node.id.length > 4){
+      this.nodeId.setValue(this.node.id);
+    }
+  }
+
+  updateNodeId(id){
+    this.node.id = id;
+  }
   ngAfterViewInit() {
     const exampleDropOptions = {
       tolerance: "touch",
       hoverClass: "dropHover",
       activeClass: "dragActive"
     };
+
 
     let Endpoint_From = {
       endpoint: ["Dot", { radius: 7 }],

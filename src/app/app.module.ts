@@ -7,11 +7,17 @@ import { NodeComponent } from "./node.component";
 import { NodeService } from "./shared/node.service";
 import { NodesContainerComponent } from "./nodes-container.component";
 
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 @NgModule({
-  imports: [BrowserModule, FormsModule],
-  declarations: [AppComponent, NodeComponent, NodesContainerComponent],
+  imports: [
+    BrowserModule, 
+    FormsModule, 
+    ReactiveFormsModule],
+  declarations: [
+    AppComponent, 
+    NodeComponent, 
+    NodesContainerComponent],
   providers: [NodeService],
   entryComponents: [NodeComponent],
   bootstrap: [AppComponent]
