@@ -2,15 +2,13 @@ import { NodeService } from "./shared/node.service";
 import { NodesContainerComponent } from "./nodes-container.component";
 import { Component, Input, AfterViewInit } from "@angular/core";
 
-
-// tslint:disable-next-line: interface-name
 export interface Node {
   id: any;
 }
 
 @Component({
   selector: "node",
-  template: `
+  template: ` 
   <div class="node" id="{{node.id}}">
       <button
         type="button"
@@ -46,17 +44,13 @@ export class NodeComponent implements AfterViewInit {
   @Input() node: Node;
   @Input() jsPlumbInstance;
 
-
-  // tslint:disable-next-line: typedef
   ngAfterViewInit() {
-    // tslint:disable-next-line: typedef
     const exampleDropOptions = {
       tolerance: "touch",
       hoverClass: "dropHover",
       activeClass: "dragActive"
     };
 
-    // tslint:disable-next-line: typedef
     let Endpoint_From = {
       endpoint: ["Dot", { radius: 7 }],
       paintStyle: { fill: "#99cb3a" },
@@ -70,7 +64,6 @@ export class NodeComponent implements AfterViewInit {
       dropOptions: exampleDropOptions
     };
 
-    // tslint:disable-next-line: typedef
     let Endpoint_TO = {
       endpoint: ["Dot", { radius: 4 }],
       paintStyle: { fill: "#ffcb3a" },
@@ -87,7 +80,7 @@ export class NodeComponent implements AfterViewInit {
     this.jsPlumbInstance.addEndpoint(id, { anchor: "Top", uuid: id + "_top" }, Endpoint_TO);
     this.jsPlumbInstance.draggable(id);
   }
-  // tslint:disable-next-line: typedef
+
   removeNode(node:Node) {
     this.nodeService.removeNode(node);
   }

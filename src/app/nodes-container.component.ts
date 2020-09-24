@@ -14,11 +14,10 @@ export class NodesContainerComponent implements OnInit {
 
   @Input() nodes = [];
   @Input() connections = [];
-  @ViewChild("nodes", { read: ViewContainerRef }) viewContainerRef: ViewContainerRef;
+  @ViewChild("nodes", { read: ViewContainerRef }) viewContainerRef: ViewContainerRef; 
 
 
   constructor(private nodeService: NodeService) {}
-  // tslint:disable-next-line: typedef
   ngOnInit() {  // dynamic load
 
         this.nodeService.setRootViewContainerRef(this.viewContainerRef);
@@ -44,7 +43,6 @@ export class NodesContainerComponent implements OnInit {
   }
   saveNodeJson() {
     const container = this.viewContainerRef.element.nativeElement.parentNode;
-    // tslint:disable-next-line: typedef
     const nodes = Array.from(container.querySelectorAll(".node")).map((node: any) => {
       return {
         id: node.id,
@@ -52,14 +50,9 @@ export class NodesContainerComponent implements OnInit {
         left: node.offsetLeft,
       };
     });
-
-    // tslint:disable-next-line: typedef
     const connections = (this.nodeService.jsPlumbInstance.getAllConnections() as any[])
                         .map((conn) => ({ uuids: conn.getUuids() }));
-
-    // tslint:disable-next-line: typedef
     const json = JSON.stringify({ nodes, connections });
-
     console.log(json);
   }
 }
